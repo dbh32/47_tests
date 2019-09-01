@@ -69,10 +69,12 @@ class TestMain(unittest.TestCase):
     @patch('builtins.input')
     def test_move_doc(self, mock_input):
         self.assertTrue('10006' in directories['2'] and not directories['4'])
+        self.assertFalse('10006' in directories['4'] and not directories['2'])
         mock_input.side_effect = ['10006', '4']
         with unittest.mock.patch('builtins.input', mock_input):
             main.move_doc()
         self.assertTrue('10006' in directories['4'] and not directories['2'])
+        self.assertFalse('10006' in directories['2'] and not directories['4'])
 
 
 if __name__ == '__main__':
